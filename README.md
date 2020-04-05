@@ -13,6 +13,11 @@
 ## Screenshots
 - [Screenshots](https://github.com/osamaelhosany/ProgressSteps/tree/master/Screeshots)
 
+![alt text](https://github.com/osamaelhosany/ProgressSteps/blob/master/Screeshots/Screenshot_1586055440.png)
+![alt text](https://github.com/osamaelhosany/ProgressSteps/blob/master/Screeshots/Screenshot_1586055431.png)
+![alt text](https://github.com/osamaelhosany/ProgressSteps/blob/master/Screeshots/Screenshot_1586055444.png)
+
+
 ## My Controls
 - [Dropdown Menu](https://github.com/osamaelhosany/DropdownMenu)
 - [ImageEditor](https://github.com/osamaelhosany/ImageEditor-XamarinForms)

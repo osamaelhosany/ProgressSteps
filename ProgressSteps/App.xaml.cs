@@ -10,7 +10,7 @@ namespace ProgressSteps
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new AngleArcPage();
         }
 
         protected override void OnStart()

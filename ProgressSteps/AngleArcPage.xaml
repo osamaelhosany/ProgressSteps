@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="ProgressSteps.AngleArcPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+    x:Name="RootItem"
+    BackgroundColor="#548EC1">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackLayout
+            WidthRequest="300"
+            HeightRequest="400"
+            BackgroundColor="Khaki"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <skia:SKCanvasView
+                x:Name="canvasView"
+                BackgroundColor="MediumPurple"
+                PaintSurface="OnCanvasViewPaintSurface"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand" />
+            <Label HorizontalOptions="Center"
+                   FontSize="Medium"
+                   TextColor="Black">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding state, Source={x:Reference RootItem}}" />
+                        <Span Text=" / " />
+                        <Span Text="5" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <StackLayout Orientation="Horizontal"
+                         Spacing="20"
+                         Margin="5"
+                         HorizontalOptions="Center">
+                <Button
+                    BackgroundColor="Aquamarine"
+                    Clicked="BackButton_Clicked"
+                    Text="Back"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End" />
+                <Button
+                    BackgroundColor="Aquamarine"
+                    Clicked="NextButton_Clicked"
+                    Text="Next"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End" />
+                
+            </StackLayout>
+
+        </StackLayout>
+
+    </Grid>
+</ContentPage>

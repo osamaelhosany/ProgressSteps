@@ -13,9 +13,8 @@
 ## Screenshots
 - [Screenshots](https://github.com/osamaelhosany/ProgressSteps/tree/master/Screeshots)
 
-![alt text](https://github.com/osamaelhosany/ProgressSteps/blob/master/Screeshots/Screenshot_1586055440.png)
-![alt text](https://github.com/osamaelhosany/ProgressSteps/blob/master/Screeshots/Screenshot_1586055431.png)
-![alt text](https://github.com/osamaelhosany/ProgressSteps/blob/master/Screeshots/Screenshot_1586055444.png)
+![alt text](https://github.com/osamaelhosany/ProgressSteps/blob/master/Screeshots/Simulator%20Screen%20Shot%20-%201.png)
+![alt text](https://github.com/osamaelhosany/ProgressSteps/blob/master/Screeshots/Simulator%20Screen%20Shot%20-%202.png)
 
 
 ## My Controls

@@ -29,7 +29,7 @@ namespace ProgressSteps
         public int state { get; set; }
         SKCanvas canvas { get; set; }
         float startAngle1 = -90;
-
+        public int stepcount { get; set; }
         public AngleArcPage()
         {
             InitializeComponent();
@@ -42,6 +42,32 @@ namespace ProgressSteps
             canvas = surface.Canvas;
             if (!IsDrawed)
             {
+                canvas.Clear();
+                //string text = "OUTLINE";
+
+                //SKPaint textPaint = new SKPaint
+                //{
+                //    Style = SKPaintStyle.Stroke,
+                //    StrokeWidth = 1,
+                //    FakeBoldText = true,
+                //    Color = SKColors.Blue
+                //};
+
+                //// Adjust TextSize property so text is 95% of screen width
+                //float textWidth = textPaint.MeasureText(text);
+                ////  textPaint.TextSize = 0.95f * info.Width * textPaint.TextSize / textWidth;
+                //textPaint.TextSize = 50;
+
+                //// Find the text bounds
+                //SKRect textBounds = new SKRect();
+                //textPaint.MeasureText(text, ref textBounds);
+
+                //// Calculate offsets to center the text on the screen
+                //float xText = info.Width / 2 - textBounds.MidX;
+                //float yText = info.Height / 2 - textBounds.MidY;
+
+                //// And draw the text
+                //canvas.DrawText(text, 10, 20, textPaint);
                 DrawProgressSteps(canvas);
             }
             else if (frombackbtn)
@@ -70,7 +96,7 @@ namespace ProgressSteps
 
         void DrawProgressSteps(SKCanvas canvas)
         {
-            canvas.Clear();
+           // canvas.Clear();
 
             SKRect rect = new SKRect(300, 300, 500, 500);
             float startAngle = -90;
@@ -86,6 +112,7 @@ namespace ProgressSteps
                         StrokeWidth = 20,
                         Color = SKColors.LightGray
                     });
+                    
                     startAngle += sweepAngle + 5;
                 }
             }
@@ -133,13 +160,13 @@ namespace ProgressSteps
 
         void NextButton_Clicked(System.Object sender, System.EventArgs e)
         {
-            canvasView.InvalidateSurface();
+            stepcount++;
         }
 
         void BackButton_Clicked(System.Object sender, System.EventArgs e)
         {
             frombackbtn = true;
-            canvasView.InvalidateSurface();
+            stepcount--;    
         }
     }
 }

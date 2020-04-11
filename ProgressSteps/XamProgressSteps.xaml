@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="ProgressSteps.XamProgressSteps"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms">
+    <skia:SKCanvasView
+        x:Name="canvasView"
+        BackgroundColor="MediumPurple"
+        PaintSurface="OnCanvasViewPaintSurface"
+         />
+</ContentView>

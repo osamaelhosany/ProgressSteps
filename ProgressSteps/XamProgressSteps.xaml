@@ -4,13 +4,13 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
-    BackgroundColor="DarkRed"
     WidthRequest="150"
-        HeightRequest="150">
+    HeightRequest="150"
+    x:Name="content">
+
     <skia:SKCanvasView
         x:Name="canvasView"
-        WidthRequest="150"
-        HeightRequest="150"
-        BackgroundColor="MediumPurple"
+
         PaintSurface="OnCanvasViewPaintSurface" />
+
 </ContentView>

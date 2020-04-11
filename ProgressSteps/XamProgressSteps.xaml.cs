@@ -1,23 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using SkiaSharp;
+using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 
 namespace ProgressSteps
 {
-    public partial class XamProgressSteps : ContentView
+    public partial class XamProgressSteps 
     {
         public static readonly BindableProperty StepCountProperty =
             BindableProperty.Create(nameof(StepCount), typeof(int), typeof(XamProgressSteps), 0, BindingMode.TwoWay,propertyChanged: OnStepCountChanged);
-
         public static readonly BindableProperty StepMaxProperty =
                   BindableProperty.Create(nameof(StepMax), typeof(int), typeof(XamProgressSteps), 0, BindingMode.TwoWay);
         public static readonly BindableProperty TextSizeProperty =
                   BindableProperty.Create(nameof(TextSize), typeof(float), typeof(XamProgressSteps),default,BindingMode.TwoWay);
+        public static readonly BindableProperty StrokeWidthProperty =
+          BindableProperty.Create(nameof(StrokeWidth), typeof(float), typeof(XamProgressSteps), default, BindingMode.TwoWay);
         public static readonly BindableProperty ColorActiveStepsProperty =
-            BindableProperty.Create(nameof(ColorActiveSteps), typeof(SKColor), typeof(XamProgressSteps),SKColors.DarkBlue, BindingMode.TwoWay);
+            BindableProperty.Create(nameof(ColorActiveSteps), typeof(Color), typeof(XamProgressSteps),Color.DarkBlue, BindingMode.TwoWay);
         public static readonly BindableProperty ColorInactiveStepsProperty =
-                 BindableProperty.Create(nameof(ColorInactiveSteps), typeof(SKColor), typeof(XamProgressSteps), SKColors.LightGray, BindingMode.TwoWay);
+                 BindableProperty.Create("ColorInactiveSteps", typeof(Color), typeof(XamProgressSteps), defaultValue: Color.LightGray, BindingMode.TwoWay);
+        public static readonly BindableProperty TextColorProperty =
+                 BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(XamProgressSteps), Color.DarkBlue, BindingMode.TwoWay);
+
         public int StepCount
         {
             get
@@ -51,23 +56,45 @@ namespace ProgressSteps
                 SetValue(TextSizeProperty, value);
             }
         }
-
-        public SKColor ColorActiveSteps
+        public float StrokeWidth
         {
             get
             {
-                return (SKColor)GetValue(ColorActiveStepsProperty);
+                return (float)GetValue(StrokeWidthProperty);
+            }
+            set
+            {
+                SetValue(StrokeWidthProperty, value);
+            }
+        }
+
+        public Color TextColor
+        {
+            get
+            {
+                return (Color)GetValue(TextColorProperty);
+            }
+            set
+            {
+                SetValue(TextColorProperty, value);
+            }
+        }
+        public Color ColorActiveSteps
+        {
+            get
+            {
+                return (Color)GetValue(ColorActiveStepsProperty);
             }
             set
             {
                 SetValue(ColorActiveStepsProperty, value);
             }
         }
-        public SKColor ColorInactiveSteps
+        public Color ColorInactiveSteps
         {
             get
             {
-                return (SKColor)GetValue(ColorInactiveStepsProperty);
+                return (Color)GetValue(ColorInactiveStepsProperty);
             }
             set
             {
@@ -100,8 +127,14 @@ namespace ProgressSteps
 
             SKSurface surface = e.Surface;
             canvas = surface.Canvas;
-            var x = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Height;
-            rect = new SKRect(100, 100, 300, 300);
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                rect = new SKRect(180, 100, 380, 300);
+            }
+            else
+            {
+                rect = new SKRect(50, 50, 250, 250);
+            }
 
             if (StepCount == 1)
             {
@@ -111,20 +144,17 @@ namespace ProgressSteps
             DrawProgressSteps(canvas);
 
             DrawSteps(canvas);
-            var midy = rect.MidY;
-            var y = (info.Height / 2)- midy;
-            var newY = y > 0 ? (info.Height / 2) + y : (info.Height / 2) - y;
+
             canvas.DrawText(StepCount.ToString()+" / "+StepMax.ToString(), new SKPoint() { X = (info.Width /2)-TextSize, Y = (info.Height / 2)+10 }, new SKPaint
             {
                 StrokeWidth = 10,
-                Color = SKColors.Red,
+                Color = TextColor.ToSKColor(),
                 TextSize = TextSize,
             });
-         //   var scale = e.Info.Width / canvasView.Width;
-           // canvas.Scale(Convert.ToInt32(scale));
-           // var scale = Convert.ToInt32(info.Width / canvasView.Width);
+            
+            var scale = Convert.ToInt32(info.Width / canvasView.Width);
 
-          //  canvas.Scale(scale);
+            canvas.Scale(scale);
         }
 
         void DrawProgressSteps(SKCanvas canvas)
@@ -141,8 +171,8 @@ namespace ProgressSteps
                     canvas.DrawPath(path, new SKPaint
                     {
                         Style = SKPaintStyle.Stroke,
-                        StrokeWidth = 20,
-                        Color =ColorInactiveSteps 
+                        StrokeWidth = StrokeWidth,
+                        Color = ColorInactiveSteps.ToSKColor() 
                     });
                     startAngle += sweepAngle + 5;
                 }
@@ -161,8 +191,8 @@ namespace ProgressSteps
                     canvas.DrawPath(path, new SKPaint
                     {
                         Style = SKPaintStyle.Stroke,
-                        StrokeWidth = 20,
-                        Color = ColorActiveSteps
+                        StrokeWidth = StrokeWidth,
+                        Color = ColorActiveSteps.ToSKColor()
                     });
                     startAngle += sweepAngle + 5;
                 }

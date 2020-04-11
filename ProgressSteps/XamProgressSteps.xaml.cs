@@ -12,6 +12,8 @@ namespace ProgressSteps
 
         public static readonly BindableProperty StepMaxProperty =
                   BindableProperty.Create(nameof(StepMax), typeof(int), typeof(XamProgressSteps), 0, BindingMode.TwoWay);
+        public static readonly BindableProperty TextSizeProperty =
+                  BindableProperty.Create(nameof(TextSize), typeof(float), typeof(XamProgressSteps),default,BindingMode.TwoWay);
         public static readonly BindableProperty ColorActiveStepsProperty =
             BindableProperty.Create(nameof(ColorActiveSteps), typeof(SKColor), typeof(XamProgressSteps),SKColors.DarkBlue, BindingMode.TwoWay);
         public static readonly BindableProperty ColorInactiveStepsProperty =
@@ -38,6 +40,18 @@ namespace ProgressSteps
                 SetValue(StepMaxProperty, value);
             }
         }
+        public float TextSize
+        {
+            get
+            {
+                return (float)GetValue(TextSizeProperty);
+            }
+            set
+            {
+                SetValue(TextSizeProperty, value);
+            }
+        }
+
         public SKColor ColorActiveSteps
         {
             get
@@ -61,11 +75,11 @@ namespace ProgressSteps
             }
         }
 
-        private bool IsDrawed { get; set; }
         private SKCanvas canvas { get; set; }
-        private float startAngle1 = -90;
-        private static int oldStep, newStep;
+        private float startAngle = -90;
+        private static int newStep;
         private SKRect rect;
+
         public XamProgressSteps()
         {
             InitializeComponent();
@@ -74,7 +88,6 @@ namespace ProgressSteps
 
         private static void OnStepCountChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            oldStep = (int)oldValue;
             newStep = (int)newValue;
             var control = (XamProgressSteps)bindable;
             if (newStep > control.StepMax || newStep < 0)
@@ -83,42 +96,42 @@ namespace ProgressSteps
         }
         void OnCanvasViewPaintSurface(System.Object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs e)
         {
+            SKImageInfo info = e.Info;
+
             SKSurface surface = e.Surface;
             canvas = surface.Canvas;
-            rect = new SKRect(75, 75, Convert.ToInt32(this.WidthRequest*2), Convert.ToInt32(this.HeightRequest*2));
+            var x = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Height;
+            rect = new SKRect(100, 100, 300, 300);
 
-            //if (!IsDrawed)
-            //{
-            //    DrawProgressSteps(canvas);
-            //}
-            //else
-            if (oldStep > newStep)
+            if (StepCount == 1)
             {
-                DrawProgressSteps(canvas);
-                DrawSteps(canvas);
+                startAngle = -90;
             }
-            else if (StepCount <= StepMax)
-            { 
-                if (StepCount == 1)
-                {
-                    startAngle1 = -90;
-                }
-                DrawProgressSteps(canvas);
-                DrawSteps(canvas);
-            }
-            canvas.DrawText(StepCount.ToString()+" / "+StepMax.ToString(), new SKPoint() { X = 200, Y = 200 }, new SKPaint
+
+            DrawProgressSteps(canvas);
+
+            DrawSteps(canvas);
+            var midy = rect.MidY;
+            var y = (info.Height / 2)- midy;
+            var newY = y > 0 ? (info.Height / 2) + y : (info.Height / 2) - y;
+            canvas.DrawText(StepCount.ToString()+" / "+StepMax.ToString(), new SKPoint() { X = (info.Width /2)-TextSize, Y = (info.Height / 2)+10 }, new SKPaint
             {
                 StrokeWidth = 10,
                 Color = SKColors.Red,
-                TextSize = 60
+                TextSize = TextSize,
             });
+         //   var scale = e.Info.Width / canvasView.Width;
+           // canvas.Scale(Convert.ToInt32(scale));
+           // var scale = Convert.ToInt32(info.Width / canvasView.Width);
+
+          //  canvas.Scale(scale);
         }
 
         void DrawProgressSteps(SKCanvas canvas)
         {
             canvas.Clear();
 
-            float startAngle = -90;
+            startAngle = -90;
             float sweepAngle = (360/StepMax) - 5;
             for (int i = 0; i < StepMax; i++)
             {
@@ -134,29 +147,11 @@ namespace ProgressSteps
                     startAngle += sweepAngle + 5;
                 }
             }
-            IsDrawed = true;
-        }
-
-        void DrawNextButton(SKCanvas canvas)
-        {
-            float sweepAngle = (360 / StepMax) - 5;
-
-            using (SKPath path = new SKPath())
-            {
-                path.AddArc(rect, startAngle1, sweepAngle);
-                canvas.DrawPath(path, new SKPaint
-                {
-                    Style = SKPaintStyle.Stroke,
-                    StrokeWidth = 20,
-                    Color = ColorActiveSteps
-                });
-                startAngle1 += sweepAngle + 5;
-            }
         }
 
         void DrawSteps(SKCanvas canvas)
         {
-            float startAngle = -90;
+            startAngle = -90;
             float sweepAngle = (360 / StepMax) - 5;
             for (int i = 0; i < StepCount; i++)
             {
@@ -172,7 +167,6 @@ namespace ProgressSteps
                     startAngle += sweepAngle + 5;
                 }
             }
-            startAngle1 = startAngle;
         }
     }
 }

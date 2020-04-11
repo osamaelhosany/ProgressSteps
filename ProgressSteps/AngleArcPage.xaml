@@ -7,16 +7,18 @@
     xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
     x:Name="RootItem"
     BackgroundColor="#548EC1">
-    <Grid>
+    <StackLayout>
+          
         <StackLayout
             BackgroundColor="Transparent"
             HorizontalOptions="Center"
             VerticalOptions="Center">
-            <progresssteps:XamProgressSteps
-                HeightRequest="200"
-                WidthRequest="200"
+          <progresssteps:XamProgressSteps
                 StepCount="{Binding stepcount, Source={x:Reference RootItem}}"
-                StepMax="10" />
+                StepMax="20"
+                WidthRequest="150"
+                HeightRequest="150"
+                TextSize="40"/>
             <StackLayout
                 Margin="5"
                 Orientation="Horizontal"
@@ -38,5 +40,5 @@
             </StackLayout>
 
         </StackLayout>
-    </Grid>
+    </StackLayout>
 </ContentPage>

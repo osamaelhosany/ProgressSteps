@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -11,10 +11,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="XamProgressSteps.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="XamProgressSteps.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.530" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.1.1" />
     <PackageReference Include="SkiaSharp" Version="1.68.1.1" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.2.7" />
+    <PackageReference Include="XamProgressSteps" Version="1.0.0" />
   </ItemGroup>
 </Project>

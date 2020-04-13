@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:progresssteps="clr-namespace:ProgressSteps"
     xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+    xmlns:progresssteps1="clr-namespace:XamProgressSteps;assembly=XamProgressSteps"
     x:Name="RootItem"
     BackgroundColor="#548EC1">
     <Grid>
@@ -13,31 +14,31 @@
             BackgroundColor="Azure"
             HorizontalOptions="Center"
             VerticalOptions="Center">
-            <progresssteps:XamProgressSteps
+            <progresssteps1:XamProgressSteps
                 BackgroundColor="DarkRed"
                 ColorActiveSteps="DarkOrange"
                 ColorInactiveSteps="Beige"
                 StepCount="{Binding stepcount, Source={x:Reference RootItem}}"
-                StepMax="8"
+                StepMax="4"
                 StrokeWidth="10"
                 TextColor="Azure"
                 TextSize="40" />
             <StackLayout
                 Margin="5"
+                HorizontalOptions="FillAndExpand"
                 Orientation="Horizontal"
-                Spacing="20"
-                HorizontalOptions="FillAndExpand">
+                Spacing="20">
                 <Button
                     BackgroundColor="Aquamarine"
                     Clicked="BackButton_Clicked"
-                    Text="Back"
                     HorizontalOptions="FillAndExpand"
+                    Text="Back"
                     VerticalOptions="End" />
                 <Button
                     BackgroundColor="Aquamarine"
                     Clicked="NextButton_Clicked"
-                    Text="Next"
                     HorizontalOptions="FillAndExpand"
+                    Text="Next"
                     VerticalOptions="End" />
 
             </StackLayout>

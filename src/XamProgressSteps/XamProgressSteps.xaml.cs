@@ -4,7 +4,7 @@ using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 
-namespace ProgressSteps
+namespace XamProgressSteps
 {
     public partial class XamProgressSteps
     {

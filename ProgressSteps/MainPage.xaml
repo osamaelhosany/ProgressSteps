@@ -6,14 +6,15 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:progresssteps="clr-namespace:ProgressSteps"
+    xmlns:progresssteps1="clr-namespace:XamProgressSteps;assembly=XamProgressSteps"
     mc:Ignorable="d">
     <StackLayout>
         <!--  Place new controls here  -->
 
-        <progresssteps:XamProgressSteps
+        <progresssteps1:XamProgressSteps
+            HeightRequest="150"
             StepCount="5"
             StepMax="10"
-            HeightRequest="150"
-            WidthRequest="150"/>
+            WidthRequest="150" />
     </StackLayout>
 </ContentPage>

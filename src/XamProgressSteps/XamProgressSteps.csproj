@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>OsamaElhussiny</Authors>
+    <PackageProjectUrl>https://github.com/osamaelhosany/ProgressSteps</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/osamaelhosany/ProgressSteps</RepositoryUrl>
+    <Description>The Progress Steps element can be used to display the current step.</Description>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" Version="1.68.1.1" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.1.1" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991864" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="XamProgressSteps.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>
